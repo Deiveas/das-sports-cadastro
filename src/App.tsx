@@ -1,11 +1,13 @@
-import { useEffect } from 'react'
-import { Provider, useDispatch } from 'react-redux'
-import Header from './components/Header'
-import Produtos from './containers/Produtos'
+import React from 'react'
+import { Provider } from 'react-redux'
+import {
+  createBrowserRouter,
+  RouteObject,
+  RouterProvider
+} from 'react-router-dom'
 import { GlobalStyle } from './styles'
 import { store } from './store'
-import { setProdutos } from './store/reducers/produto'
-import { useGetProdutosQuery } from './services/api'
+import Home from './pages/Home'
 
 export type Produto = {
   id: number
@@ -13,33 +15,24 @@ export type Produto = {
   preco: number
   imagem: string
 }
+const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: <Home />
+  },
 
-const AppContent = () => {
-  const dispatch = useDispatch()
-  const { data: produtos, error, isLoading } = useGetProdutosQuery()
-
-  useEffect(() => {
-    if (produtos) {
-      dispatch(setProdutos(produtos))
-    }
-  }, [produtos, dispatch])
-
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error loading products</div>
-
-  return (
-    <div className="container">
-      <Header />
-      <Produtos />
-    </div>
-  )
-}
+  {
+    path: '/cadastro',
+    element: <h1>Pagina de cadastro</h1>
+  }
+]
+const rotas = createBrowserRouter(routes)
 
 function App() {
   return (
     <Provider store={store}>
       <GlobalStyle />
-      <AppContent />
+      <RouterProvider router={rotas} />
     </Provider>
   )
 }
