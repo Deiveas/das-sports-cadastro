@@ -8,6 +8,7 @@ import {
 import { GlobalStyle } from './styles'
 import { store } from './store'
 import Home from './pages/Home'
+import Cadastro from './pages/Cadastro'
 
 export type Produto = {
   id: number
@@ -23,7 +24,7 @@ const routes: RouteObject[] = [
 
   {
     path: '/cadastro',
-    element: <h1>Pagina de cadastro</h1>
+    element: <Cadastro />
   }
 ]
 const rotas = createBrowserRouter(routes)
