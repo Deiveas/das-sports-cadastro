@@ -9,6 +9,7 @@ import { GlobalStyle } from './styles'
 import { store } from './store'
 import Home from './pages/Home'
 import Cadastro from './pages/Cadastro'
+import AreaCadastral from './pages/AreaCadastral'
 
 export type Produto = {
   id: number
@@ -20,6 +21,11 @@ const routes: RouteObject[] = [
   {
     path: '/',
     element: <Home />
+  },
+
+  {
+    path: '/AreaCadastral',
+    element: <AreaCadastral />
   },
 
   {

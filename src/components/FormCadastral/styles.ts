@@ -1,18 +1,7 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
-export const TituloCadastro = styled.div`
-  text-align: center;
-  margin-bottom: 24px;
-
-  h1 {
-    font-size: 32px;
-    text-transform: uppercase;
-    color: ${cores.corPrincipal};
-  }
-`
-
-export const Formulario = styled.form`
+export const FormCadastro = styled.form`
   background-color: ${cores.corFundo};
   padding: 32px;
   border-radius: 8px;
@@ -38,19 +27,17 @@ export const Formulario = styled.form`
     border: 1px solid ${cores.corPrincipal};
     background-color: ${cores.corTexto};
     color: ${cores.corFundo};
-
-    &::placeholder {
-      color: ${cores.corFundo};
-    }
   }
 `
-export const BotãoContainer = styled.div`
-  text-align: center;
+export const BotoesContainer = styled.div`
+  display: flex;
+  justify-content: space-between; /* Espaça os botões igualmente */
+  margin-top: 16px; /* Espaçamento superior para separar dos inputs */
 `
 
 export const Botao = styled.button`
+  display: inline-block;
   width: 45%;
-  margin-top: 16px;
   padding: 12px;
   background-image: linear-gradient(
     45deg,

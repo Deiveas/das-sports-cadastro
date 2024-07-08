@@ -1,9 +1,11 @@
 import React from 'react'
 import * as S from './styles'
+import HeaderCadastral from '../HeaderCadastral'
 
 const FormCadastro: React.FC = () => {
   return (
     <>
+      <HeaderCadastral />
       <S.TituloCadastro>
         <h1>Preencha seus dados</h1>
       </S.TituloCadastro>
@@ -38,7 +40,9 @@ const FormCadastro: React.FC = () => {
             placeholder="Digite seu telefone"
           />
         </div>
-        <S.Botao type="submit">Cadastrar</S.Botao>
+        <S.BotãoContainer>
+          <S.Botao type="submit">Cadastrar</S.Botao>
+        </S.BotãoContainer>
       </S.Formulario>
     </>
   )
