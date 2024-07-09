@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import * as S from './styles'
 
 const FormCadastral = () => {
+  const [estaAlterando, setEstaAlterando] = useState(false)
   return (
     <>
       <S.FormCadastro>
@@ -18,12 +20,20 @@ const FormCadastral = () => {
           <label htmlFor="telefone">Telefone:</label>
           <input type="tel" id="telefone" name="telefone" />
         </div>
-        <S.BotoesContainer></S.BotoesContainer>
-        <S.BotoesContainer>
-          <S.Botao>Alterar</S.Botao>
-          <S.Botao>Remover</S.Botao>
-        </S.BotoesContainer>
       </S.FormCadastro>
+      <S.BotoesContainer>
+        {estaAlterando ? (
+          <>
+            <S.Botao>Salvar</S.Botao>
+            <S.Botao onClick={() => setEstaAlterando(false)}>Cancelar</S.Botao>
+          </>
+        ) : (
+          <>
+            <S.Botao onClick={() => setEstaAlterando(true)}>Alterar</S.Botao>
+            <S.Botao>Remover</S.Botao>
+          </>
+        )}
+      </S.BotoesContainer>
     </>
   )
 }

@@ -49,7 +49,7 @@ export const BotãoContainer = styled.div`
 `
 
 export const Botao = styled.button`
-  width: 45%;
+  width: 100%;
   margin-top: 16px;
   padding: 12px;
   background-image: linear-gradient(

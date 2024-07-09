@@ -3,12 +3,14 @@ import { api } from '../services/api'
 import carrinhoReducer from './reducers/carrinho'
 import favoritoReducer from './reducers/favorito'
 import produtoReducer from './reducers/produto' // Importação do reducer de produto
+import contatoReducer from './reducers/contato'
 
 export const store = configureStore({
   reducer: {
     carrinho: carrinhoReducer,
     favorito: favoritoReducer,
     produto: produtoReducer,
+    contato: contatoReducer,
     [api.reducerPath]: api.reducer
   },
   middleware: (getDefaultMiddleware) =>
