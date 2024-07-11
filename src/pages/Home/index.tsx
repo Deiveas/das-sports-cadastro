@@ -4,6 +4,7 @@ import { setProdutos } from '../../store/reducers/produto'
 import { useGetProdutosQuery } from '../../services/api'
 import Header from '../../components/Header'
 import Produtos from '../../containers/Produtos'
+import BotaoCadastrar from '../../components/BotaoCadastrar'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -22,6 +23,7 @@ const Home = () => {
     <div className="container">
       <Header />
       <Produtos />
+      <BotaoCadastrar />
     </div>
   )
 }

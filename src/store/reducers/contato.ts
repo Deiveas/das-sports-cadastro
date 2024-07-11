@@ -1,4 +1,3 @@
-// src/store/reducers/contato.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type Contato = {
@@ -20,21 +19,17 @@ const contatoSlice = createSlice({
   name: 'contato',
   initialState,
   reducers: {
-    adicionarContato(state, action: PayloadAction<Contato>) {
+    adicionarContato: (state, action: PayloadAction<Contato>) => {
       state.contatos.push(action.payload)
     },
-    alterarContato(state, action: PayloadAction<Contato>) {
-      const index = state.contatos.findIndex(
-        (contato) => contato.id === action.payload.id
-      )
+    alterarContato: (state, action: PayloadAction<Contato>) => {
+      const index = state.contatos.findIndex((c) => c.id === action.payload.id)
       if (index !== -1) {
         state.contatos[index] = action.payload
       }
     },
-    removerContato(state, action: PayloadAction<number>) {
-      state.contatos = state.contatos.filter(
-        (contato) => contato.id !== action.payload
-      )
+    removerContato: (state, action: PayloadAction<number>) => {
+      state.contatos = state.contatos.filter((c) => c.id !== action.payload)
     }
   }
 })

@@ -40,9 +40,9 @@ const FormCadastro: React.FC = () => {
             placeholder="Digite seu telefone"
           />
         </div>
-        <S.BotãoContainer>
+        <S.BotaoContainer>
           <S.Botao type="submit">Cadastrar</S.Botao>
-        </S.BotãoContainer>
+        </S.BotaoContainer>
       </S.Formulario>
     </>
   )

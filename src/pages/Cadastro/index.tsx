@@ -1,7 +1,7 @@
 import React from 'react'
 import FormCadastro from '../../components/FormCadastro'
 
-const Cadastro = () => {
+const Cadastro: React.FC = () => {
   return (
     <div className="container">
       <FormCadastro />

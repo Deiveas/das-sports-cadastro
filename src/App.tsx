@@ -17,22 +17,22 @@ export type Produto = {
   preco: number
   imagem: string
 }
+
 const routes: RouteObject[] = [
   {
     path: '/',
     element: <Home />
   },
-
   {
     path: '/AreaCadastral',
     element: <AreaCadastral />
   },
-
   {
     path: '/cadastro',
     element: <Cadastro />
   }
 ]
+
 const rotas = createBrowserRouter(routes)
 
 function App() {

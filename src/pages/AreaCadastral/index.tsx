@@ -1,8 +1,9 @@
+import React from 'react'
 import { TituloCadastral } from './styles'
 import FormCadastral from '../../components/FormCadastral'
 import HeaderCadastral from '../../components/HeaderCadastral'
 
-const AreaCadastral = () => {
+const AreaCadastral: React.FC = () => {
   return (
     <div className="container">
       <HeaderCadastral />

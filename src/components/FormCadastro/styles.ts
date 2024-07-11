@@ -44,7 +44,7 @@ export const Formulario = styled.form`
     }
   }
 `
-export const BotãoContainer = styled.div`
+export const BotaoContainer = styled.div`
   text-align: center;
 `
 
