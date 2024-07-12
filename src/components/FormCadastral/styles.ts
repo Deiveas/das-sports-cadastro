@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+// src/components/FormCadastral/styles.ts
+import styled, { keyframes } from 'styled-components'
 import { cores } from '../../styles'
 
 export const FormCadastro = styled.form`
@@ -29,6 +30,7 @@ export const FormCadastro = styled.form`
     color: ${cores.corFundo};
   }
 `
+
 export const BotoesContainer = styled.div`
   display: flex;
   justify-content: space-between; /* Espaça os botões igualmente */
@@ -37,8 +39,9 @@ export const BotoesContainer = styled.div`
 
 export const Botao = styled.button`
   display: inline-block;
-  width: 45%;
-  padding: 12px;
+  width: 100%;
+  padding: 8px 16px;
+  margin: 16px;
   background-image: linear-gradient(
     45deg,
     ${cores.corPrincipal},
@@ -58,4 +61,26 @@ export const Botao = styled.button`
       ${cores.corSecundaria}
     );
   }
+`
+
+export const EstiloBotao = styled.div`
+  display: flex;
+  width: 100%;
+`
+
+const piscar = keyframes`
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+`
+
+export const MensagemSucesso = styled.div`
+  color: red; /* Cor da mensagem */
+  font-size: 32px; /* Tamanho da fonte */
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  justify-content: space-between;
+  margin: 16px 0; /* Margem em cima e embaixo */
+  animation: ${piscar} 1s infinite; /* Aplica a animação */
 `

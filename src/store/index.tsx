@@ -6,7 +6,6 @@ import carrinhoReducer from './reducers/carrinho'
 import favoritoReducer from './reducers/favorito'
 import produtoReducer from './reducers/produto'
 import contatoReducer from './reducers/contato'
-import cadastroReducer from './reducers/cadastro' // Importação do reducer de cadastro
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +13,6 @@ export const store = configureStore({
     favorito: favoritoReducer,
     produto: produtoReducer,
     contato: contatoReducer,
-    cadastro: cadastroReducer, // Adicionando o reducer de cadastro
     [api.reducerPath]: api.reducer
   },
   middleware: (getDefaultMiddleware) =>

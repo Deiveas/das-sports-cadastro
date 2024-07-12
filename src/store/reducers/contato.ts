@@ -1,3 +1,4 @@
+// src/store/reducers/contato.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type Contato = {
@@ -9,10 +10,12 @@ type Contato = {
 
 type ContatoState = {
   contatos: Contato[]
+  mensagemSucesso: string
 }
 
 const initialState: ContatoState = {
-  contatos: []
+  contatos: [],
+  mensagemSucesso: ''
 }
 
 const contatoSlice = createSlice({
@@ -21,6 +24,7 @@ const contatoSlice = createSlice({
   reducers: {
     adicionarContato: (state, action: PayloadAction<Contato>) => {
       state.contatos.push(action.payload)
+      state.mensagemSucesso = 'Cadastro salvo com sucesso!'
     },
     alterarContato: (state, action: PayloadAction<Contato>) => {
       const index = state.contatos.findIndex((c) => c.id === action.payload.id)
@@ -30,10 +34,21 @@ const contatoSlice = createSlice({
     },
     removerContato: (state, action: PayloadAction<number>) => {
       state.contatos = state.contatos.filter((c) => c.id !== action.payload)
+    },
+    limparMensagemSucesso: (state) => {
+      state.mensagemSucesso = ''
+    },
+    setMensagemSucesso: (state, action: PayloadAction<string>) => {
+      state.mensagemSucesso = action.payload
     }
   }
 })
 
-export const { adicionarContato, alterarContato, removerContato } =
-  contatoSlice.actions
+export const {
+  adicionarContato,
+  alterarContato,
+  removerContato,
+  setMensagemSucesso,
+  limparMensagemSucesso
+} = contatoSlice.actions
 export default contatoSlice.reducer
