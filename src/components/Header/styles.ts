@@ -1,3 +1,4 @@
+// src/components/Header/styles.ts
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
@@ -18,6 +19,7 @@ export const Header = styled.header`
     flex: 1;
     font-style: italic;
     color: ${cores.corTexto};
+    margin-right: 16px; /* Aumenta o espaço à direita do título */
   }
 
   div {
@@ -26,12 +28,13 @@ export const Header = styled.header`
 
     img {
       width: 18px;
-      margin-right: 8px;
+      margin-right: 12px; /* Aumenta o espaço à direita da imagem */
       margin-left: 16px;
     }
 
     span {
       color: ${cores.corFundo};
+      margin-left: 12px; /* Aumenta o espaço à esquerda entre spans */
     }
   }
 
@@ -39,7 +42,7 @@ export const Header = styled.header`
     flex-direction: column;
 
     div {
-      margin-top: 16px;
+      margin-top: 16px; /* Espaçamento superior quando em coluna */
     }
   }
 `

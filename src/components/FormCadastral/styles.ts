@@ -37,6 +37,17 @@ export const BotoesContainer = styled.div`
   margin-top: 16px; /* Espaçamento superior para separar dos inputs */
 `
 
+export const VoltarContainer = styled.div`
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 400px;
+  right: 5px;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+`
+
 export const Botao = styled.button`
   display: inline-block;
   width: 100%;

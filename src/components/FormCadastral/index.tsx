@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootReducer } from '../../store'
 import {
+  adicionarContato,
   alterarContato,
   removerContato,
   limparMensagemSucesso,
   setMensagemSucesso
 } from '../../store/reducers/contato'
 import * as S from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const FormCadastral = () => {
   const contatos = useSelector((state: RootReducer) => state.contato.contatos)
@@ -16,6 +18,7 @@ const FormCadastral = () => {
     (state: RootReducer) => state.contato.mensagemSucesso
   )
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [estaAlterando, setEstaAlterando] = useState(false)
   const [contatoSelecionado, setContatoSelecionado] = useState<number | null>(
     null
@@ -38,7 +41,7 @@ const FormCadastral = () => {
     if (mensagemSucesso) {
       const timer = setTimeout(() => {
         dispatch(limparMensagemSucesso())
-      }, 5000) // Limpar a mensagem após 3 segundos
+      }, 5000) // Limpar a mensagem após 5 segundos
       return () => clearTimeout(timer)
     }
   }, [mensagemSucesso, dispatch])
@@ -59,14 +62,24 @@ const FormCadastral = () => {
       dispatch(
         alterarContato({ id: contatoSelecionado, nome, email, telefone })
       )
-      // Aqui, despachar a ação para mostrar a mensagem de sucesso
-      dispatch(setMensagemSucesso('Cadastro salvo com sucesso!')) // Adicione esta linha
-      setEstaAlterando(false)
-      setContatoSelecionado(null)
-      setNome('')
-      setEmail('')
-      setTelefone('')
+      dispatch(setMensagemSucesso(`Cadastro de ${nome} salvo com sucesso!`))
+    } else {
+      const novoContato = {
+        id: Date.now(), // ou qualquer lógica para gerar um ID único
+        nome,
+        email,
+        telefone
+      }
+      dispatch(adicionarContato(novoContato))
+      dispatch(setMensagemSucesso(`Cadastro de ${nome} salvo com sucesso!`))
     }
+
+    // Limpa os campos após salvar
+    setNome('')
+    setEmail('')
+    setTelefone('')
+    setContatoSelecionado(null)
+    setEstaAlterando(false)
   }
 
   const handleRemover = (contatoId: number) => {
@@ -84,6 +97,10 @@ const FormCadastral = () => {
     setNome('')
     setEmail('')
     setTelefone('')
+  }
+
+  const handleVoltarCompras = () => {
+    navigate('/')
   }
 
   return (
@@ -125,10 +142,13 @@ const FormCadastral = () => {
           />
         </div>
       </S.FormCadastro>
+      <S.VoltarContainer>
+        <S.Botao onClick={handleVoltarCompras}>Voltar às Compras</S.Botao>
+      </S.VoltarContainer>
       <S.BotoesContainer>
         {estaAlterando ? (
           <>
-            <S.Botao onClick={handleSalvar}>Salvar</S.Botao>
+            <S.Botao onClick={handleSalvar}>Confirmar</S.Botao>
             <S.Botao onClick={handleCancelar}>Cancelar</S.Botao>
           </>
         ) : (

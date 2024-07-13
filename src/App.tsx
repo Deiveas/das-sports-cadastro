@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from 'react'
 import { Provider } from 'react-redux'
 import {
@@ -10,6 +11,7 @@ import { store } from './store'
 import Home from './pages/Home'
 import Cadastro from './pages/Cadastro'
 import AreaCadastral from './pages/AreaCadastral'
+import Footer from './components/Footer'
 
 export type Produto = {
   id: number
@@ -40,6 +42,7 @@ function App() {
     <Provider store={store}>
       <GlobalStyle />
       <RouterProvider router={rotas} />
+      <Footer />
     </Provider>
   )
 }
