@@ -28,8 +28,8 @@ const FormCadastral = () => {
   const [telefone, setTelefone] = useState('')
 
   useEffect(() => {
-    if (!estaAlterando && contatos.length > 0) {
-      const contato = contatos[0]
+    if (contatos.length > 0 && !estaAlterando) {
+      const contato = contatos[contatos.length - 1] // Pega o último contato adicionado
       setContatoSelecionado(contato.id)
       setNome(contato.nome)
       setEmail(contato.email)
@@ -41,13 +41,13 @@ const FormCadastral = () => {
     if (mensagemSucesso) {
       const timer = setTimeout(() => {
         dispatch(limparMensagemSucesso())
-      }, 5000) // Limpar a mensagem após 5 segundos
+      }, 5000)
       return () => clearTimeout(timer)
     }
   }, [mensagemSucesso, dispatch])
 
   const selecionarContato = (contatoId: number) => {
-    const contato = contatos.find((contato) => contato.id === contatoId)
+    const contato = contatos.find((c) => c.id === contatoId)
     if (contato) {
       setContatoSelecionado(contato.id)
       setNome(contato.nome)
@@ -74,33 +74,41 @@ const FormCadastral = () => {
       dispatch(setMensagemSucesso(`Cadastro de ${nome} salvo com sucesso!`))
     }
 
-    // Limpa os campos após salvar
+    // Limpa os campos e o estado após salvar
     setNome('')
     setEmail('')
     setTelefone('')
     setContatoSelecionado(null)
     setEstaAlterando(false)
+
+    // Aqui, force um refresh do estado de contatos (opcional)
+    // dispatch(limparContatos());
   }
 
-  const handleRemover = (contatoId: number) => {
-    dispatch(removerContato(contatoId))
-    setEstaAlterando(false)
-    setContatoSelecionado(null)
+  const limparCampos = () => {
     setNome('')
     setEmail('')
     setTelefone('')
+    setContatoSelecionado(null)
+    setEstaAlterando(false)
   }
 
   const handleCancelar = () => {
-    setEstaAlterando(false)
-    setContatoSelecionado(null)
-    setNome('')
-    setEmail('')
-    setTelefone('')
+    limparCampos()
   }
 
   const handleVoltarCompras = () => {
     navigate('/')
+  }
+
+  const handleRemover = (contatoId: number) => {
+    dispatch(removerContato(contatoId))
+    // Limpa o formulário após remover um contato
+    setNome('')
+    setEmail('')
+    setTelefone('')
+    setContatoSelecionado(null)
+    setEstaAlterando(false)
   }
 
   return (
@@ -143,7 +151,9 @@ const FormCadastral = () => {
         </div>
       </S.FormCadastro>
       <S.VoltarContainer>
-        <S.Botao onClick={handleVoltarCompras}>Voltar às Compras</S.Botao>
+        <S.BotaoVoltar onClick={handleVoltarCompras}>
+          Voltar às Compras
+        </S.BotaoVoltar>
       </S.VoltarContainer>
       <S.BotoesContainer>
         {estaAlterando ? (
@@ -167,5 +177,4 @@ const FormCadastral = () => {
     </>
   )
 }
-
 export default FormCadastral

@@ -44,8 +44,22 @@ export const VoltarContainer = styled.div`
   bottom: 400px;
   right: 5px;
   display: flex;
-  justify-content: center;
+  margin-right: 8px;
+`
+export const BotaoVoltar = styled.button`
+  background-color: ${cores.corPrincipal};
   font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 50%; /* Deixa o botão redondo */
+  padding: 10px 20px; /* Ajuste o tamanho conforme necessário */
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: ${cores.corFundo}; /* Muda a cor ao passar o mouse */
+  }
 `
 
 export const Botao = styled.button`
