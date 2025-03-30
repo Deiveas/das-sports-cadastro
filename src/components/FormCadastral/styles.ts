@@ -134,6 +134,7 @@ export const ListaContatos = styled.div`
 
 export const ItemContato = styled.div`
   display: flex;
+  flex-wrap: wrap; /* Permite que os itens se ajustem conforme necessário */
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -141,6 +142,12 @@ export const ItemContato = styled.div`
   background-color: ${cores.corTexto};
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 600px) {
+    flex-direction: column; /* Para telas pequenas, empilha os itens */
+    align-items: flex-start;
+    padding: 15px;
+  }
 `
 
 export const InfoContato = styled.div`
@@ -160,7 +167,16 @@ export const InfoContato = styled.div`
 
 export const BotoesContato = styled.div`
   display: flex;
+  flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
   gap: 10px;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 600px) {
+    width: 100%; /* Ocupa a largura total */
+    justify-content: space-between; /* Ajusta melhor a disposição */
+    margin-top: 10px; /* Espaço entre botões e conteúdo */
+  }
 `
 // Add these to your styles.js file
 export const ImportExportContainer = styled.div`
