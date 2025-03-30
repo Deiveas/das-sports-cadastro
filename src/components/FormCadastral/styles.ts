@@ -1,4 +1,3 @@
-// src/components/FormCadastral/styles.ts
 import styled, { keyframes } from 'styled-components'
 import { cores } from '../../styles'
 
@@ -108,4 +107,89 @@ export const MensagemSucesso = styled.div`
   justify-content: space-between;
   margin: 16px 0; /* Margem em cima e embaixo */
   animation: ${piscar} 1s infinite; /* Aplica a animação */
+`
+
+export const BotoesAcao = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+`
+
+export const ListaContatos = styled.div`
+  margin-top: 20px;
+  padding: 15px;
+  background-color: ${cores.corFundo};
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    color: ${cores.corTexto};
+    text-align: center;
+    margin-bottom: 15px;
+  }
+`
+
+export const ItemContato = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: ${cores.corTexto};
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+`
+
+export const InfoContato = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    margin-bottom: 5px;
+    color: ${cores.corFundo};
+  }
+
+  span {
+    color: ${cores.corFundo};
+    font-size: 0.9em;
+  }
+`
+
+export const BotoesContato = styled.div`
+  display: flex;
+  gap: 10px;
+`
+// Add these to your styles.js file
+export const ImportExportContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+`
+
+export const BotaoImportar = styled.span`
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  &:hover {
+    background-color: #45a049;
+  }
+`
+
+export const ContatosContainer = styled.div`
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+`
+// Adicione estes estilos ao seu arquivo styles.js ou styles.ts
+
+export const ExportContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
 `

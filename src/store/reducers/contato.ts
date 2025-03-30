@@ -1,4 +1,5 @@
-// src/store/reducers/contato.ts
+// src/store/reducers/contato/index.ts
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type Contato = {
@@ -11,13 +12,13 @@ type Contato = {
 type ContatoState = {
   contatos: Contato[]
   mensagemSucesso: string
-  nomeCadastrado: string // Nova propriedade para armazenar o nome cadastrado
+  nomeCadastrado: string
 }
 
 const initialState: ContatoState = {
   contatos: [],
   mensagemSucesso: '',
-  nomeCadastrado: '' // Inicializa como string vazia
+  nomeCadastrado: ''
 }
 
 const contatoSlice = createSlice({
@@ -26,27 +27,35 @@ const contatoSlice = createSlice({
   reducers: {
     adicionarContato: (state, action: PayloadAction<Contato>) => {
       state.contatos.push(action.payload)
-      state.mensagemSucesso = 'Cadastro salvo com sucesso!'
-      state.nomeCadastrado = action.payload.nome // Define o nome cadastrado
+      state.nomeCadastrado = action.payload.nome // Atualiza nome ao cadastrar
     },
     alterarContato: (state, action: PayloadAction<Contato>) => {
-      const index = state.contatos.findIndex((c) => c.id === action.payload.id)
-      if (index !== -1) {
+      const index = state.contatos.findIndex(
+        (contato) => contato.id === action.payload.id
+      )
+      if (index >= 0) {
         state.contatos[index] = action.payload
-        state.nomeCadastrado = action.payload.nome // Atualiza o nome cadastrado
       }
     },
     removerContato: (state, action: PayloadAction<number>) => {
-      state.contatos = state.contatos.filter((c) => c.id !== action.payload)
-    },
-    limparMensagemSucesso: (state) => {
-      state.mensagemSucesso = ''
+      state.contatos = state.contatos.filter(
+        (contato) => contato.id !== action.payload
+      )
+
+      // Atualiza nomeCadastrado para o último contato restante
+      state.nomeCadastrado =
+        state.contatos.length > 0
+          ? state.contatos[state.contatos.length - 1].nome
+          : ''
     },
     setMensagemSucesso: (state, action: PayloadAction<string>) => {
       state.mensagemSucesso = action.payload
     },
+    limparMensagemSucesso: (state) => {
+      state.mensagemSucesso = ''
+    },
     setNomeCadastrado: (state, action: PayloadAction<string>) => {
-      state.nomeCadastrado = action.payload // Nova ação para definir o nome
+      state.nomeCadastrado = action.payload
     }
   }
 })
@@ -57,7 +66,7 @@ export const {
   removerContato,
   setMensagemSucesso,
   limparMensagemSucesso,
-  setNomeCadastrado // Exporta a nova ação
+  setNomeCadastrado
 } = contatoSlice.actions
 
 export default contatoSlice.reducer
