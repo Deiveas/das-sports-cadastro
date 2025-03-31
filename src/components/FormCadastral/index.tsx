@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootReducer } from '../../store'
 import {
@@ -53,13 +53,11 @@ const FormCadastral = () => {
         console.error('Erro ao carregar contatos do localStorage:', error)
       }
     }
-  }, [contatos.length, dispatch])
+  }, []) // Removido contatos.length da dependência para evitar loop
 
   // Efeito para salvar contatos no localStorage quando mudam
   useEffect(() => {
-    if (contatos.length > 0) {
-      localStorage.setItem('contatos', JSON.stringify(contatos))
-    }
+    localStorage.setItem('contatos', JSON.stringify(contatos))
   }, [contatos])
 
   // Efeito para limpar mensagem de sucesso após 5 segundos
@@ -107,7 +105,9 @@ const FormCadastral = () => {
   }
 
   // Função para salvar um contato (novo ou existente)
-  const handleSalvar = () => {
+  const handleSalvar = (e: React.MouseEvent) => {
+    e.preventDefault() // Previne comportamento padrão do botão
+
     if (!validarFormulario()) return
 
     try {
@@ -141,6 +141,12 @@ const FormCadastral = () => {
     }
   }
 
+  // Função para lidar com o submit do formulário
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault() // Previne o comportamento padrão do formulário
+    handleSalvar(e as unknown as React.MouseEvent)
+  }
+
   // Função para limpar os campos do formulário
   const limparCampos = () => {
     setNome('')
@@ -151,7 +157,8 @@ const FormCadastral = () => {
   }
 
   // Handler para o botão cancelar
-  const handleCancelar = () => {
+  const handleCancelar = (e: React.MouseEvent) => {
+    e.preventDefault()
     limparCampos()
   }
 
@@ -220,7 +227,7 @@ const FormCadastral = () => {
       {mensagemSucesso && (
         <S.MensagemSucesso>{mensagemSucesso}</S.MensagemSucesso>
       )}
-      <S.FormCadastro>
+      <S.FormCadastro onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nome">Nome:</label>
           <input
@@ -255,11 +262,13 @@ const FormCadastral = () => {
         </div>
 
         <S.BotoesAcao>
-          <S.Botao onClick={handleSalvar} disabled={!nome || !email}>
+          <S.Botao type="submit" disabled={!nome || !email}>
             {estaAlterando ? 'Confirmar Alteração' : 'Adicionar Contato'}
           </S.Botao>
           {estaAlterando && (
-            <S.Botao onClick={handleCancelar}>Cancelar</S.Botao>
+            <S.Botao type="button" onClick={handleCancelar}>
+              Cancelar
+            </S.Botao>
           )}
         </S.BotoesAcao>
       </S.FormCadastro>
@@ -273,7 +282,9 @@ const FormCadastral = () => {
       {/* Botão de exportar contatos */}
       {contatos.length > 0 && (
         <S.ExportContainer>
-          <S.Botao onClick={exportarContatos}>Exportar Contatos</S.Botao>
+          <S.Botao type="button" onClick={exportarContatos}>
+            Exportar Contatos
+          </S.Botao>
         </S.ExportContainer>
       )}
 
@@ -289,10 +300,16 @@ const FormCadastral = () => {
                   <span>{contato.telefone}</span>
                 </S.InfoContato>
                 <S.BotoesContato>
-                  <S.Botao onClick={() => selecionarContato(contato.id)}>
+                  <S.Botao
+                    type="button"
+                    onClick={() => selecionarContato(contato.id)}
+                  >
                     Alterar
                   </S.Botao>
-                  <S.Botao onClick={() => handleRemover(contato.id)}>
+                  <S.Botao
+                    type="button"
+                    onClick={() => handleRemover(contato.id)}
+                  >
                     Remover
                   </S.Botao>
                 </S.BotoesContato>
